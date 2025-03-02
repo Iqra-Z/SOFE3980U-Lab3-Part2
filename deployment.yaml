@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: binary-calculator
+  labels:
+    app: binary-calculator
+spec:
+  replicas: 1  # Reduced replicas to avoid scheduling issues
+  selector:
+    matchLabels:
+      app: binary-calculator
+  template:
+    metadata:
+      labels:
+        app: binary-calculator
+    spec:
+      containers:
+        - name: binary-calculator
+          image: iqrazahid/binary-calculator:latest  # Ensure this image exists
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+          resources:
+            requests:
+              memory: "256Mi"  # Reduced memory request
+              cpu: "250m"  # Reduced CPU request
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
+
+
